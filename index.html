@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Asistencia Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex@3.6.2/dist/vuex.js"></script>
+    <script src="https://unpkg.com/vue-router@3.5.4/dist/vue-router.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+.selectable-row.presente { background-color: #c8e6c9; }   /* Verde */
+.selectable-row.tardanza { background-color: #fff9c4; }   /* Amarillo */
+.selectable-row.ausente { background-color: #ffcdd2; }    /* Rojo */
+.seleccionado { border: 2px solid #1976d2 !important; }
+.dyntab {
+    height: 100vh;
+    position: relative;
+    padding-bottom: 70px; /* espacio para el botón */
+}
+.sticky-top {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: #337ab7; /* o el color que necesites */
+  color: white;
+}
+.table-wrapper {
+    height: calc(100vh - 170px); /* ajusta según tu header */
+    overflow-y: auto;
+}
+
+.guardar-fixed {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+    </style>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./store.js"></script>
+    <script src="./router.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>
