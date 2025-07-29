@@ -1,3 +1,4 @@
+import Trayectos from './components/Trayectos.js';
 const Login = {
     template: `
     <div class="container mt-5">
@@ -26,10 +27,18 @@ const Login = {
 };
 
 const Home = {
+    components: {
+        Trayectos
+  },
     data() {
         return {
             seleccionados: [],
-            cursoSeleccionado: ''
+            filtroDesdeTrayectos: '',
+            listaAnios: ['2025TRGN', '2025TRGO'],
+            listaTurnos: ['LU1500', 'VI1500', 'MI1700'],
+            listaTipos: ['TR1', 'TR2']
+            /* cursoSeleccionado: '',
+            cursoSel: '' */
         };
     },
 created() {
@@ -38,6 +47,9 @@ created() {
             this.seleccionados = this.$store.state.cursos
                 .filter(al => al.estado === 'Presente')
                 .map(al => al.id);
+                this.listaAnios = Array.from(new Set(this.$store.state.cursos.map(c => c.curso.split(".")[0])));
+                this.listaTurnos = Array.from(new Set(this.$store.state.cursos.map(c => c.curso.split(".")[1])));
+                this.listaTipos = Array.from(new Set(this.$store.state.cursos.map(c => c.curso.split(".")[2])));
         });
     });
 },
@@ -46,10 +58,18 @@ created() {
             return this.$store.state.cursos;
         },
         cursosFiltrados() {
-                /* if (!this.cursoSeleccionado) return this.cursos;
+            if (!this.filtroDesdeTrayectos) return this.cursos;
+            return this.cursos.filter(c => c.curso?.includes(this.filtroDesdeTrayectos))
+            .sort((a, b) => a.alumno.localeCompare(b.alumno));
+/*             return this.cursos.filter(c => c.curso === this.filtroDesdeTrayectos);
+ */                /* if (!this.cursoSeleccionado) return this.cursos;
                 return this.cursos.filter(c => c.curso === this.cursoSeleccionado); */
             },
             listaCursosUnicos() {
+                const set = new Set(this.cursos.map(c => c.curso));
+                return Array.from(set);
+            },
+            listaCurso() {
                 const set = new Set(this.cursos.map(c => c.curso));
                 return Array.from(set);
             }
@@ -64,7 +84,7 @@ created() {
             return this.seleccionados.includes(id);
         },
         guardar() {
-            fetch('api/marcar_presentes.php', {
+            fetch('../api/marcar_presentes.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(this.seleccionados)
@@ -86,50 +106,55 @@ created() {
     template: `
     <div class="dyntab">
         <h3 class="text-center my-3">Alumnos</h3>
-        
-        <div class="container my-3">
-  <label><strong>Filtrar por curso:</strong></label>
-  <select class="form-control" v-model="cursoSeleccionado">
-    <option value="">-- Todos --</option>
-    <option v-for="c in listaCursosUnicos" :key="c" :value="c">{{ c }}</option>
-  </select>
-</div>
-        <div class="table-responsive table-wrapper" style="height: calc(100vh - 160px); overflow-y: auto;">
-            <table class="table table-hover table-bordered text-center">
-                <thead class="bg-primary text-white sticky-top">
-                    <tr>
+        <div class="container">
+            <div class="row justify-content-center">
+                    <trayectos
+                    :anios="listaAnios" 
+                    :turnos="listaTurnos" 
+                    :tipos="listaTipos" 
+                    @filtro-cambiado="filtroDesdeTrayectos = $event"></trayectos>
+                    
+                </div>
+        </div>
+        <div class="container my-3" style="margin-top: 10px;">
+
+        </div>
+            <div class="table-responsive table-wrapper" style="height: calc(100vh - 160px); overflow-y: auto;">
+                <table class="table table-hover table-bordered text-center">
+                    <thead class="bg-primary text-white sticky-top">
+                        <tr>
                      
                         <th>Alumno</th>
                         <th>DNI</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr 
-                        v-for="al in cursosFiltrados" 
-                        :key="al.id"
-                         :class="[
-                            'selectable-row',
-                            { 'seleccionado': estaSeleccionado(al.id) },
-                            al.asistencias ? al.asistencias.toLowerCase() : ''
-                        ]"
-                        @click="toggleSeleccion(al.id)"
-                        style="cursor: pointer;"
-                    >
-                        <td>{{ al.alumno }}</td>
-                        <td>{{ al.dni }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr 
+                            v-for="al in cursosFiltrados" 
+                            :key="al.id"
+                            :class="[
+                                'selectable-row',
+                                { 'seleccionado': estaSeleccionado(al.id) },
+                                al.asistencias ? al.asistencias.toLowerCase() : ''
+                            ]"
+                            @click="toggleSeleccion(al.id)"
+                            style="cursor: pointer;"
+                        >
+                            <td>{{ al.alumno }}</td>
+                            <td>{{ al.dni }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="guardar-fixed">
-            <button class="btn btn-success btn-block"
-                    :disabled="seleccionados.length === 0"
-                    @click="guardar">
-                Guardar ({{ seleccionados.length }})
-            </button>
+            <div class="guardar-fixed">
+                <button class="btn btn-success btn-block"
+                        :disabled="seleccionados.length === 0"
+                        @click="guardar">
+                    Guardar ({{ seleccionados.length }})
+                </button>
+            </div>
         </div>
-    </div>
     `
 };
 
@@ -140,3 +165,4 @@ const router = new VueRouter({
         { path: '/home', component: Home }
     ]
 });
+export default router;
