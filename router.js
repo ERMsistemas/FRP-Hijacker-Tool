@@ -46,8 +46,8 @@ created() {
             return this.$store.state.cursos;
         },
         cursosFiltrados() {
-                if (!this.cursoSeleccionado) return this.cursos;
-                return this.cursos.filter(c => c.curso === this.cursoSeleccionado);
+                /* if (!this.cursoSeleccionado) return this.cursos;
+                return this.cursos.filter(c => c.curso === this.cursoSeleccionado); */
             },
             listaCursosUnicos() {
                 const set = new Set(this.cursos.map(c => c.curso));
