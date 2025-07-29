@@ -37,7 +37,7 @@ created() {
         this.$nextTick(() => {
             this.seleccionados = this.$store.state.cursos
                 .filter(al => al.estado === 'Presente')
-                .map(al => al.id);
+                .map(al => al.id) ;
         });
     });
 },
