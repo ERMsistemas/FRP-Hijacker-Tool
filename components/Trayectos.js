@@ -24,8 +24,8 @@ export default {
     }
   },
   template: `
-    <div class="row">
-      <div class="col-md-4">
+    <div class="row justify-content-center mb-3">
+      <div class="col-lg-4 col-md-8 mb-3">
         <label>Año/Trayecto:</label>
         <select class="form-control" v-model="anio">
           <option disabled value="">-- Seleccionar --</option>
@@ -33,7 +33,7 @@ export default {
         </select>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-lg-4 col-md-8 mb-3">
         <label>Turno:</label>
         <select class="form-control" v-model="turno">
           <option disabled value="">-- Seleccionar --</option>
@@ -41,7 +41,7 @@ export default {
         </select>
       </div>
 
-      <div class="col-md-4">
+      <div class="col-lg-4 col-md-8 mb-3">
         <label>Tipo:</label>
         <select class="form-control" v-model="tipo">
           <option disabled value="">-- Seleccionar --</option>

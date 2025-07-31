@@ -36,7 +36,8 @@ const Home = {
             filtroDesdeTrayectos: '',
             listaAnios: ['2025TRGN', '2025TRGO'],
             listaTurnos: ['LU1500', 'VI1500', 'MI1700'],
-            listaTipos: ['TR1', 'TR2']
+            listaTipos: ['TR1', 'TR2'],
+            estadoSeleccionado: 'Presente'
             /* cursoSeleccionado: '',
             cursoSel: '' */
         };
@@ -65,14 +66,20 @@ created() {
  */                /* if (!this.cursoSeleccionado) return this.cursos;
                 return this.cursos.filter(c => c.curso === this.cursoSeleccionado); */
             },
-            listaCursosUnicos() {
+            Presentes() {
+                return this.cursosFiltrados.filter(c => c.asistencias === 'Presente').length;
+            },
+            Ausentes() {
+                return this.cursosFiltrados.filter(c => c.asistencias !== 'Presente').length;
+            }
+            /* listaCursosUnicos() {
                 const set = new Set(this.cursos.map(c => c.curso));
                 return Array.from(set);
             },
             listaCurso() {
                 const set = new Set(this.cursos.map(c => c.curso));
                 return Array.from(set);
-            }
+            } */
     },
     methods: {
         toggleSeleccion(id) {
@@ -84,48 +91,87 @@ created() {
             return this.seleccionados.includes(id);
         },
         guardar() {
+            this.$nextTick(() => {
+                $('#asistenciaModal').modal('show');
+            });
+        },
+        confirmarGuardar() {
+            $('#asistenciaModal').modal('hide');
             fetch('../api/marcar_presentes.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(this.seleccionados)
+                body: JSON.stringify({
+                seleccionados: this.seleccionados,
+                estado: this.estadoSeleccionado
+                })
             })
             .then(res => res.json())
             .then(() => {
                 alert('Guardado correctamente');
                 this.seleccionados = [];
                 this.$store.dispatch('fetchCursos');
-                this.$nextTick(() => {
-                    this.seleccionados = this.$store.state.cursos
-                        .filter(al => al.estado === 'Presente')
-                        .map(al => al.id);
-                }); 
             })
             .catch(err => console.error(err));
-        }
+            }
     },
     template: `
     <div class="dyntab">
-        <h3 class="text-center my-3">Alumnos</h3>
-        <div class="container">
-            <div class="row justify-content-center">
+    <!-- Contenedor de Cards -->
+<div class="d-flex justify-content-center flex-wrap gap-5 my-4">
+
+  <!-- Card Alumnos -->
+  <div class="card text-bg-primary text-center shadow" style="width: 10rem;">
+    <div class="card-body">
+      <div class="mb-2">
+        <i class="bi bi-people-fill fs-3"></i><br>
+        <strong>Alumnos</strong>
+      </div>
+      <h3 class="card-title mb-0">1537</h3>
+    </div>
+  </div>
+
+  <!-- Card Presentes -->
+  <div class="card text-bg-success text-center shadow" style="width: 10rem;">
+    <div class="card-body">
+      <div class="mb-2">
+        <i class="bi bi-check-circle-fill fs-3"></i><br>
+        <strong>Presentes</strong>
+      </div>
+      <h3 class="card-title mb-0">5</h3>
+    </div>
+  </div>
+
+  <!-- Card Ausentes -->
+  <div class="card text-bg-danger text-center shadow" style="width: 10rem;">
+    <div class="card-body">
+      <div class="mb-2">
+        <i class="bi bi-x-circle-fill fs-3"></i><br>
+        <strong>Ausentes</strong>
+      </div>
+      <h3 class="card-title mb-0">1532</h3>
+    </div>
+  </div>
+
+</div>
+
+
+            <div class="container-fluid px-4">
                     <trayectos
                     :anios="listaAnios" 
                     :turnos="listaTurnos" 
                     :tipos="listaTipos" 
                     @filtro-cambiado="filtroDesdeTrayectos = $event"></trayectos>
-                    
-                </div>
         </div>
         <div class="container my-3" style="margin-top: 10px;">
 
         </div>
             <div class="table-responsive table-wrapper" style="height: calc(100vh - 160px); overflow-y: auto;">
-                <table class="table table-hover table-bordered text-center">
+                <table class="table table-primary table-hover text-center">
                     <thead class="bg-primary text-white sticky-top">
                         <tr>
                      
-                        <th>Alumno</th>
-                        <th>DNI</th>
+                        <th class="text-center w-50">Alumno</th>
+                        <th class="text-center w-50">DNI</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,21 +186,52 @@ created() {
                             @click="toggleSeleccion(al.id)"
                             style="cursor: pointer;"
                         >
-                            <td>{{ al.alumno }}</td>
-                            <td>{{ al.dni }}</td>
+                            <td class="text-start">
+                                <div class="row">
+                                    <div class="col-2"></div>
+                                    <div class="col-8"> {{ al.alumno }}</div>
+                                </div>
+                            </td>
+                            <td class="text-center pe-4">{{ al.dni }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-            <div class="guardar-fixed">
-                <button class="btn btn-success btn-block"
+            <div class="guardar-fixed text-center">
+                <button class="btn btn-success btn-block btn-lg px-4"
                         :disabled="seleccionados.length === 0"
                         @click="guardar">
                     Guardar ({{ seleccionados.length }})
                 </button>
             </div>
+            
+            
+            
+            <div class="modal fade" id="asistenciaModal" tabindex="-1" role="dialog" aria-labelledby="asistenciaModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="asistenciaModalLabel">Confirmar asistencia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <label><input type="radio" v-model="estadoSeleccionado" value="Presente"> Presente</label><br>
+                  <label><input type="radio" v-model="estadoSeleccionado" value="Ausente"> Ausente</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" @click="confirmarGuardar">Confirmar</button>
+              </div>
+            </div>
+          </div>
         </div>
+        </div>
+
     `
 };
 
