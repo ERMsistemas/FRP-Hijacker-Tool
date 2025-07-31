@@ -126,7 +126,7 @@ created() {
         <i class="bi bi-people-fill fs-3"></i><br>
         <strong>Alumnos</strong>
       </div>
-      <h3 class="card-title mb-0">1537</h3>
+      <h3 class="card-title mb-0">{{cursosFiltrados.length}}</h3>
     </div>
   </div>
 
@@ -137,7 +137,7 @@ created() {
         <i class="bi bi-check-circle-fill fs-3"></i><br>
         <strong>Presentes</strong>
       </div>
-      <h3 class="card-title mb-0">5</h3>
+      <h3 class="card-title mb-0">{{Presentes}}</h3>
     </div>
   </div>
 
@@ -148,7 +148,7 @@ created() {
         <i class="bi bi-x-circle-fill fs-3"></i><br>
         <strong>Ausentes</strong>
       </div>
-      <h3 class="card-title mb-0">1532</h3>
+      <h3 class="card-title mb-0">{{Ausentes}}</h3>
     </div>
   </div>
 
